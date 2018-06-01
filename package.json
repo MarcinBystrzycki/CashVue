@@ -1,0 +1,20 @@
+{
+  "name": "cashvueserver",
+  "version": "1.0.0",
+  "description": "simpe backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "MBystrzycki",
+  "license": "ISC",
+  "devDependencies": {
+    "auth0-js": "^9.6.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.2",
+    "mysql": "^2.15.0"
+  }
+}
