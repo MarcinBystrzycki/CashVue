@@ -1,4 +1,5 @@
 export default {
+	authenticated: false,
 	user: {
 		name: '',
 		lastname: '',
@@ -46,4 +47,7 @@ export default {
 		}
 	],
 	activeAccount: {},
+	activeAccountEarnings: {},
+	activeAccountExpenses: {},
+	activeIndex: 0,
 };

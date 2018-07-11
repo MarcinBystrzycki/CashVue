@@ -4,7 +4,7 @@
 		:outline="account.id !== activeAccount.id"
 		:class="getButtonColor(account.color)"
 		:accountID="account.id"
-		@click="setActiveAccount(account)">
+		@click="chooseActiveButton()">
 		<div class="btn__account--account_name">
 			{{ account.name }}
 		</div>
@@ -19,7 +19,7 @@
 	import { mapGetters, mapActions } from 'vuex'
 
 	export default {
-		props: ['account'],
+		props: ['account', 'index'],
 		computed: {
 			...mapGetters({
 				accountColors: 'getAccountColors',
@@ -29,6 +29,7 @@
 		methods: {
 			...mapActions({
 				setActiveAccount: 'setActiveAccount',
+				setActiveIndex: 'setActiveIndex',
 			}),
 			getButtonColor(color) {
 				if (color) {
@@ -39,6 +40,10 @@
 					}
 				}
 			},
+			chooseActiveButton() {
+				this.setActiveIndex(this.index)
+				this.setActiveAccount(this.account)
+			}
 		},
 	}
 

@@ -1,6 +1,9 @@
 import * as types from './mutation_types'
 
 export default {
+	[types.SET_AUTHENTICATED](state, value) {
+		state.authenticated = value
+	},
 	[types.SET_USERNAME](state, value) {
 		state.user.name = value
 	},
@@ -34,4 +37,13 @@ export default {
 	[types.SET_ACTIVE_ACCOUNT](state, account) {
 		state.activeAccount = account
 	},
+	[types.SET_ACTIVE_INDEX](state, value) {
+		state.activeIndex = value
+	},
+	[types.SET_ACTIVE_ACCOUNT_EARNINGS](state, value) {
+		state.activeAccountEarnings = value
+	},
+	[types.SET_ACTIVE_ACCOUNT_EXPENSES](state, value) {
+		state.activeAccountExpenses = value
+	}
 };

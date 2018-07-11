@@ -6,8 +6,9 @@
 			</v-card-media>
 			<v-card-actions>
 				<v-layout wrap>
-					<template v-for="account in accounts">
+					<template v-for="(account, index) in accounts">
 						<account-button
+							:index="index"
 							:account="account"
 							:key="account.id"/>
 					</template>

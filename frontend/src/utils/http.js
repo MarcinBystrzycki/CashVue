@@ -1,9 +1,13 @@
 import axios from 'axios'
 
-const instance = axios.create({
+export const http = axios.create({
 	headers: {
     'Content-Type': 'application/json'
   }
 });
 
-export default instance;
+export const apiUrl = (method, params = []) => {
+	const origin = 'localhost:6060'
+
+	return `http://${origin}/${method.toLowerCase()}/${params.join('/')}`
+};

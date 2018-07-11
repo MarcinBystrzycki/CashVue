@@ -56,12 +56,12 @@ const parseUserID = (idToken) => {
 app.use(cors(corsOptions));
 
 app.get('/get/users/:id_token', (req, res) => {
-	const userID = parseUserID(req.params.id_token);
-	const dbQuery = `SELECT * FROM usersSettings WHERE id = '${userID}'`;
+  const userID = parseUserID(req.params.id_token);
+  const dbQuery = `SELECT * FROM usersSettings WHERE id = '${userID}'`;
 
-	connection.query(dbQuery, (err, results) => {
-		res.send(results);
-	});
+  connection.query(dbQuery, (err, results) => {
+    res.send(results);
+  });
 
 });
 
@@ -73,6 +73,10 @@ app.get('/get/accounts/:id_token', (req, res) => {
     res.send(results);
   });
 
+});
+
+app.get('/get/accounts/info', (req, res) => {
+  console.log(req.body);
 });
 
 app.post('/post/user', (req, res) => {
@@ -114,7 +118,7 @@ app.post('/post/accounts/update', (req, res) => {
   const dbQuery = `
     UPDATE accounts
     SET balance = '${req.body.balance}',
-    defaultCurrency = '${req.body.currency}',
+      defaultCurrency = '${req.body.currency}'
     WHERE id = '${req.body.id}'`;
 
   connection.query(dbQuery, (err, results) => {
@@ -122,5 +126,6 @@ app.post('/post/accounts/update', (req, res) => {
   });
 
 });
+
 
 app.listen(6060, () => console.log('Listening on port 6060'));

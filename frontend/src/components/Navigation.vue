@@ -38,7 +38,7 @@
         </v-list-tile>
       </router-link>
       <a href="#"
-        @click="login()"
+        @click="login"
         v-if="!authenticated">
         <v-list-tile class="navigation__elem log in">
           <v-list-tile-action>
@@ -52,7 +52,7 @@
         </v-list-tile>
       </a>
       <a href="#"
-        @click="logout()"
+        @click="logout"
         v-if="authenticated">
         <v-list-tile class="navigation__elem log out">
           <v-list-tile-action>
@@ -74,17 +74,19 @@
 
   export default {
     name: 'Navigation',
-    props: ['authenticated'],
     computed: {
+      ...mapGetters({
+        drawer: 'getDrawer',
+        authenticated: 'getAuthenticated'
+      })
+    },
+    methods: {
       login () {
         this.$emit('login')
       },
       logout () {
         this.$emit('logout')
       },
-      ...mapGetters({
-        drawer: 'getDrawer'
-      })
     }
   }
 </script>

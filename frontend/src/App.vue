@@ -1,9 +1,8 @@
 <template>
   <v-app id="app">
     <navigation
-      :authenticated="authenticated"
-      @login="login"
-      @logout="logout"
+      @login="login()"
+      @logout="logout()"
       :drawer="drawer">
     </navigation>
     <toolbar 
@@ -28,7 +27,7 @@
   import Navigation from './components/Navigation'
   import Toolbar from './components/Toolbar'
   import store from './vuex/store'
-  import { mapActions } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import jwt from 'jsonwebtoken'
 
   const auth = new AuthService()
@@ -43,19 +42,29 @@
     },
     data () {
       authNotifier.on('authChange', authState => {
-        this.authenticated = authState.authenticated
+        this.setAuthenticated(authState.authenticated)
       })
       return {
         auth,
-        authenticated,
         drawer: true,
       }
+    },
+    computed: {
+      ...mapGetters({
+        authenticated: 'getAuthenticated',
+      }),
     },
     methods: {
       login,
       logout,
+      ...mapActions({
+        setAuthenticated: 'setAuthenticated',
+      }),
     },
-    store
+    store,
+    updated() {
+      this.setAuthenticated(authState.authenticated)
+    }
   }
 </script>
 

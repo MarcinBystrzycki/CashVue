@@ -11,9 +11,16 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'Home',
-    props: ['auth', 'authenticated'],
+    props: ['auth'],
+    computed: {
+      ...mapGetters({
+        authenticated: 'getAuthenticated'
+      })
+    }
   }
 </script>
 

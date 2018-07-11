@@ -1,6 +1,8 @@
 export default {
+	getAuthenticated(state) {
+		return state.authenticated
+	},
 	getUser(state) {
-		console.log(state)
 		return state.user
 	},
 	getDrawer(state) {
@@ -17,5 +19,8 @@ export default {
 	},
 	getActiveAccount(state) {
 		return state.activeAccount
-	}
+	},
+	getActiveIndex(state) {
+		return state.activeIndex
+	},
 };

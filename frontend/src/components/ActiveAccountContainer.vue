@@ -23,12 +23,14 @@
 										</h6>
 										<v-text-field
 											type="number"
-											v-model="actualBalance"
+											:value="balance"
+											v-model="balance"
 											label="Balance">
 										</v-text-field>
 										<v-select
 											label="Currency"
-											v-model="actualCurrency"
+											:value="currency"
+											v-model="currency"
 											:items="currencies">
 										</v-select>
 										<v-btn @click="dialog = !dialog">
@@ -67,8 +69,8 @@
 		data() {
 			return {
 				dialog: false,
-				balance: null,
-				currency: ''
+				balance: 0,
+				currency: '',
 			}
 		},
 		computed: {
@@ -77,12 +79,6 @@
 				accountColors: 'getAccountColors',
 				currencies: 'getCurrencies'
 			}),
-			actualBalance() {
-				return this.activeAccount.balance
-			},
-			actualCurrency() {
-				return this.activeAccount.currency
-			}
 		},
 		methods: {
 			...mapActions({
@@ -98,11 +94,20 @@
 			},
 			updateAccount() {
 				this.updateUserAccount({
-					balance: this.actualBalance,
-					currency: this.actualCurrency,
+					balance: this.balance,
+					currency: this.currency,
 					id: this.activeAccount.id
 				})
 			},
+		},
+		watch: {
+			activeAccount: {
+				handler() {
+					this.balance = this.activeAccount.balance
+					this.currency = this.activeAccount.defaultCurrency
+				},
+				deep: true
+			}
 		}
 	}
 </script>
