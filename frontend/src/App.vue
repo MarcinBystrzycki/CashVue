@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <navigation
+      :authenticated="authenticated"
       @login="login()"
       @logout="logout()"
       :drawer="drawer">
@@ -42,17 +43,14 @@
     },
     data () {
       authNotifier.on('authChange', authState => {
+        this.authenticated = authState.authenticated
         this.setAuthenticated(authState.authenticated)
       })
       return {
         auth,
+        authenticated,
         drawer: true,
       }
-    },
-    computed: {
-      ...mapGetters({
-        authenticated: 'getAuthenticated',
-      }),
     },
     methods: {
       login,
@@ -61,10 +59,10 @@
         setAuthenticated: 'setAuthenticated',
       }),
     },
-    store,
-    updated() {
-      this.setAuthenticated(authState.authenticated)
-    }
+    mounted() {
+      this.setAuthenticated(this.authenticated)
+    },
+    store
   }
 </script>
 

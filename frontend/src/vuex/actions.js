@@ -13,8 +13,9 @@ export default {
 		commit(types.SET_GENDER, data.gender)
 		commit(types.SET_BIRTHDATE, data.birthDate)
 	},
-  setActiveAccount({ commit }, data) {
+  setActiveAccount({ commit, dispatch }, data) {
     commit(types.SET_ACTIVE_ACCOUNT, data)
+    dispatch('getActiveAccountEarningsAndExpenses', data.id)
   },
   setActiveIndex({ commit }, data) {
     commit(types.SET_ACTIVE_INDEX, data)
@@ -49,7 +50,7 @@ export default {
   getUserProfile({ commit, dispatch }) {
     http.get(apiUrl('get', ['users', localStorage.id_token]))
       .then((res) => {
-        this.dispatch('setUser', res.data[0])
+        dispatch('setUser', res.data[0])
       })
       .catch((err) => console.error(err))
   },
@@ -68,7 +69,38 @@ export default {
       })
       .catch((err) => console.error(err))
   },
-  getActiveAccountEarningsAndExpenses({ commit, dispatch }) {
+  getActiveAccountEarningsAndExpenses({ commit, dispatch }, data) {
+    http.get(apiUrl('get', ['accounts', 'info', data]))
+      .then((res) => {
+        const expenses = res.data.filter((item) => item.type === 'expense');
+        const earnings = res.data.filter((item) => item.type === 'earning');
 
+        dispatch('setActiveAccountExpenses', expenses);
+        dispatch('setActiveAccountEarnings', earnings);
+      })
+      .catch((err) => console.error(err))
   },
+  addExpenseOrEarning({ commit, dispatch }, data) {
+    http.post(apiUrl('post', ['settlements', 'add']), data)
+      .then((res) => {
+        console.log('addExpenseorEarning', data)
+        dispatch('getUserAccounts')
+      })
+      .catch((err) => console.error(err))
+  },
+  updateExpenseOrEarning({ commit, dispatch }, data) {
+    http.post(apiUrl('post', ['settlements', 'update']), data)
+      .then((res) => {
+        console.log('updateExpenseorEarning', data)
+        dispatch('getUserAccounts')
+      })
+      .catch((err) => console.error(err))
+  },
+  deleteExpenseOrEarning({ commit, dispatch }, data) {
+    http.delete(apiUrl('delete', ['settlements', data]))
+      .then((res) => {
+        dispatch('getUserAccounts')
+      })
+      .catch((err) => console.error(err))  
+  }
 }

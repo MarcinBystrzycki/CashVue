@@ -3,7 +3,8 @@
 	margin: 6px !important
 	width: calc(50% - 12px)
 .btn__account
-	color: black !important
+	color: white !important
+	text-shadow: 1px 1px 1px black
 	.btn__content
 		display: block
 	.btn__account--account_name
@@ -11,8 +12,12 @@
 		font-size: 9px
 	.btn__account--balance
 		text-align: right
+	.icon__toggle
+		position: absolute
+		left: 16px
 .btn__add-account
 	width: 100%
+	color: white !important
 
 .btn__dashboard-elem-settings
 	margin: 0
@@ -32,3 +37,21 @@
 
 .grayDark
 	background-color: grey !important
+
+.datepicker-range__picker
+	box-shadow: none !important
+	border: none !important
+
+.datepicker-range__head
+	background-color: $vue-color
+	height: 50px
+	display: flex
+	align-items: center
+	justify-content: center
+	color: white
+	.datepicker-range__head--title
+		font-size: 18px
+		font-weight: 700
+
+.datepicker-range__card
+	border: none !important

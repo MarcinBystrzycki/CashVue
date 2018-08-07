@@ -1,9 +1,12 @@
 <template>
   <v-toolbar class="toolbar" app fixed>
-    <v-icon class="toolbar__icon" @click="toggleDrawer">
+    <v-icon
+      color="white"
+      class="toolbar__icon"
+      @click="toggleDrawer">
       fas fa-list
     </v-icon>
-    <v-toolbar-title>
+    <v-toolbar-title class="toolbar__title">
       CashVue
     </v-toolbar-title>
     <v-spacer>
@@ -30,5 +33,7 @@
     cursor: pointer
     &:hover
       color: white
+  .toolbar__title
+    color: white
 </style>
 

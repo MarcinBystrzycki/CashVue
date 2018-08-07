@@ -23,4 +23,10 @@ export default {
 	getActiveIndex(state) {
 		return state.activeIndex
 	},
+	getActiveAccountExpenses(state) {
+		return state.activeAccountExpenses
+	},
+	getActiveAccountEarnings(state) {
+		return state.activeAccountEarnings
+	},
 };

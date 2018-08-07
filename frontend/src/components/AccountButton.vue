@@ -1,15 +1,19 @@
 <template>
 	<v-btn 
 		class="btn__account"
-		:outline="account.id !== activeAccount.id"
 		:class="getButtonColor(account.color)"
-		:accountID="account.id"
 		@click="chooseActiveButton()">
 		<div class="btn__account--account_name">
 			{{ account.name }}
 		</div>
+		<v-icon class="icon__toggle" size="17" v-if="account.id == activeAccount.id">
+			fas fa-toggle-on
+		</v-icon>
+		<v-icon class="icon__toggle" size="17" v-else>
+			fas fa-toggle-off
+		</v-icon>
 		<div class="btn__account--balance">
-			{{ account.balance | formatMoney }}
+			{{ account.actualBalance | formatMoney }}
 			{{ account.defaultCurrency }}
 		</div>
 	</v-btn>
@@ -43,7 +47,7 @@
 			chooseActiveButton() {
 				this.setActiveIndex(this.index)
 				this.setActiveAccount(this.account)
-			}
+			},
 		},
 	}
 

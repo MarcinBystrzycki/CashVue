@@ -42,7 +42,6 @@
               @input="datepicker = false">
             </v-date-picker>
           </v-menu>
-          </v-text-field>
           <v-text-field
             label="E-mail"
             v-model="user.email"
@@ -55,7 +54,7 @@
           </v-select>
           <v-btn
             class="btn__save"
-            color="primary"
+            color="success"
             :loading="loading"
             :disabled="loading"
             @click="submitAndSave">

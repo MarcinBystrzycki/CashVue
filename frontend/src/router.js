@@ -1,10 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import Home from "./views/Home";
 import store from './vuex/store';
-import Callback from "./components/Callback.vue";
-import Profile from "./views/Profile.vue";
-import DashboardWallet from "./views/DashboardWallet.vue";
+import Callback from "./components/Callback";
+import Profile from "./views/Profile";
+import DashboardWallet from "./views/DashboardWallet";
+import Expenses from "./views/Expenses";
+import Earnings from "./views/Earnings";
 
 Vue.use(Router);
 
@@ -33,13 +35,25 @@ const router = new Router({
       path: "/profile",
       name: "Profile",
       component: Profile,
-      // beforeEnter: checkAuth
+      beforeEnter: checkAuth
     },
     {
-      path: "/wallet",
+      path: "/dashboard",
       name: "Wallet",
       component: DashboardWallet,
-      // beforeEnter: checkAuth
+      beforeEnter: checkAuth
+    },
+    {
+      path: "/expenses",
+      name: "Expenses",
+      component: Expenses,
+      beforeEnter: checkAuth
+    },
+    {
+      path: "/earnings",
+      name: "Earnings",
+      component: Earnings,
+      beforeEnter: checkAuth
     },
     {
       path: '*',

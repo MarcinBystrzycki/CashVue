@@ -8,23 +8,59 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              home
+              Home
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </router-link>
-      <router-link to="/wallet">
-        <v-list-tile class="navigation__elem" v-if="authenticated">
+      <v-list-group v-if="authenticated">
+        <v-list-tile class="navigation__elem pl-1" slot="activator">
           <v-list-tile-action>
             <v-icon>fas fa-wallet</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              wallet
+              Wallet
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-      </router-link>
+        <router-link to="/dashboard">
+          <v-list-tile class="navigation__elem pl-4">
+            <v-list-tile-action>
+              <v-icon>fas fa-wallet</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                Dashboard
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
+        <router-link to="/expenses">
+          <v-list-tile class="navigation__elem pl-4">
+            <v-list-tile-action>
+              <v-icon>fas fa-wallet</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                Expenses
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
+        <router-link to="/earnings">
+          <v-list-tile class="navigation__elem pl-4">
+            <v-list-tile-action>
+              <v-icon>fas fa-wallet</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                Earnings
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
+      </v-list-group>
       <router-link to="/profile">
         <v-list-tile class="navigation__elem" v-if="authenticated">
           <v-list-tile-action>
@@ -32,13 +68,13 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              profile
+              Profile
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </router-link>
       <a href="#"
-        @click="login"
+        @click="login()"
         v-if="!authenticated">
         <v-list-tile class="navigation__elem log in">
           <v-list-tile-action>
@@ -46,13 +82,13 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              log in
+              Log in
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </a>
       <a href="#"
-        @click="logout"
+        @click="logout()"
         v-if="authenticated">
         <v-list-tile class="navigation__elem log out">
           <v-list-tile-action>
@@ -60,7 +96,7 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              log out
+              Log out
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -74,19 +110,17 @@
 
   export default {
     name: 'Navigation',
+    props: ['authenticated'],
     computed: {
-      ...mapGetters({
-        drawer: 'getDrawer',
-        authenticated: 'getAuthenticated'
-      })
-    },
-    methods: {
       login () {
         this.$emit('login')
       },
       logout () {
         this.$emit('logout')
       },
+      ...mapGetters({
+        drawer: 'getDrawer'
+      })
     }
   }
 </script>
@@ -117,4 +151,8 @@
     .log
       position: relative
       bottom: 0
+  .list__group--active
+    &::before,
+    &::after
+      background: transparent
 </style>

@@ -20,7 +20,7 @@
       ...mapGetters({
         authenticated: 'getAuthenticated'
       })
-    }
+    },
   }
 </script>
 
