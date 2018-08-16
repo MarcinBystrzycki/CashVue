@@ -34,4 +34,9 @@ export default {
 	activeAccountEarnings: [],
 	activeAccountExpenses: [],
 	activeIndex: 0,
+	notes: [],
+	totals: {
+		expense: 0,
+		earning: 0,
+	},
 };

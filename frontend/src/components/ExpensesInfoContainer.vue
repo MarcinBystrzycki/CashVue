@@ -1,5 +1,5 @@
 <template>
-  <v-flex md12 lg6 d-flex>
+  <v-flex md12 lg6 d-flex class="earnings-expenses__container">
     <v-card class="expenses-info__container">
       <v-card-title class="earnings-expenses__header">
         <h6>
@@ -7,20 +7,22 @@
         </h6>
         <v-spacer>
         </v-spacer>
-        <span>
+        <span class="body-1">
           Start date:
         </span>
         <v-btn
+          small
           color="primary"
           text-color="white"
           class="ml-3 mr-3"
           @click="dialog = true">
           {{ fromRange }}
         </v-btn>
-        <span>
+        <span class="body-1">
           End date:
         </span>
         <v-btn
+          small
           color="primary"
           text-color="white"
           class="ml-3 mr-3"
@@ -72,7 +74,7 @@
           </v-card>
         </v-dialog>
       </v-card-title>
-      <v-card-media>
+      <v-card-media class="earnings-expenses__card-media">
         <v-layout justify-center>
           <earnings-expenses-charts
             :currency="currency"
@@ -80,6 +82,8 @@
             type="expense" />
         </v-layout>
       </v-card-media>
+      <v-card-actions>
+      </v-card-actions>
     </v-card>
   </v-flex>
 </template>

@@ -25,10 +25,8 @@ export default {
       const values = _.map(categories, (item) => {
         const amounts = _.filter(dataByDate, (obj) => obj.category === item)
         
-        return _.sumBy(amounts, (obj) => obj.amount)
+        return _.sumBy(amounts, (obj) => obj.amount).toFixed(2)
       })
-
-      console.log(values)
 
       return {
         labels: categories.length ? categories : ['no data'],

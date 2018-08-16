@@ -28,8 +28,8 @@ export default {
 	[types.ADD_ACCOUNT](state, newAccount) {
 		state.accounts = [...state.accounts, newAccount]
 	},
-	[types.SET_ACCOUNTS](state, accounts) {
-		state.accounts = accounts
+	[types.SET_ACCOUNTS](state, data) {
+		state.accounts = data.accounts
 	},
 	[types.DELETE_ACCOUNT](state, accountID) {
 		state.accounts = state.accounts.filter(account => account.id !== accountID)
@@ -45,5 +45,8 @@ export default {
 	},
 	[types.SET_ACTIVE_ACCOUNT_EXPENSES](state, value) {
 		state.activeAccountExpenses = value
-	}
+	},
+	[types.SET_NOTES](state, value) {
+		state.notes = value
+	},
 };

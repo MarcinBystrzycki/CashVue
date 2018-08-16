@@ -1,12 +1,12 @@
 <template>
-	<v-flex class="dashboard__element" xs12 sm6 md3 d-flex>
+	<v-flex class="dashboard__element" xs12 sm6 md4 d-flex>
 		<v-card>
 			<dashboard-element-header title="ACCOUNTS LIST"/>
 			<v-card-media>
 			</v-card-media>
 			<v-card-actions>
 				<v-layout wrap>
-					<template v-for="(account, index) in accounts">
+					<template v-for="(account, index) in accountsInfo">
 						<account-button
 							:index="index"
 							:account="account"
@@ -33,7 +33,7 @@
 		},
 		computed: {
 			...mapGetters({
-				accounts: 'getAccounts',
+				accountsInfo: 'getAccounts',
 			})
 		},
 	}

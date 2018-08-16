@@ -29,4 +29,10 @@ export default {
 	getActiveAccountEarnings(state) {
 		return state.activeAccountEarnings
 	},
+	getNotes(state) {
+		return state.notes
+	},
+	getTotals(state) {
+		return state.totals
+	},
 };

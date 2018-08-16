@@ -1,5 +1,5 @@
 <template>
-  <v-flex md12 lg6 d-flex>
+  <v-flex md12 lg6 d-flex class="earnings-expenses__container">
     <v-card class="earnings-expenses-table__container">
       <v-card-title class="earnings-expenses__header">
         <h6>
@@ -11,6 +11,7 @@
           v-model="dialog"
           max-width="500px">
           <v-btn
+            small
             color="primary"
             slot="activator">
             {{ 'add ' + type }}
@@ -137,7 +138,7 @@
           </td>
         </template>
         <template slot="footer">
-          <td colspan="100%" class="earnings-expenses-table__cell total-amount"> Total amount: {{ totalAmount }}</td>
+          <td colspan="100%" class="earnings-expenses-table__cell total-amount"> {{ `all ${type}s: ${totalAmount}`.toUpperCase() }}</td>
         </template>
       </v-data-table>
       <div class="text-xs-center pt-2 earnings-expenses__pagination">
@@ -162,7 +163,7 @@
         datepicker: false,
         editedID: '',
         pagination: {
-          rowsPerPage: 11,
+          rowsPerPage: 10,
         },
         editedItem: {
           name: '',
@@ -189,6 +190,7 @@
         addExpenseOrEarning: 'addExpenseOrEarning',
         updateExpenseOrEarning: 'updateExpenseOrEarning',
         deleteExpenseOrEarning: 'deleteExpenseOrEarning',
+        setTotals: 'setTotals',
       }),
       filtered(items, search, filter) {
         search = search.toString().toLowerCase()
@@ -225,7 +227,10 @@
 
         if (this.$refs.addEarningExpenseForm.validate()) {
           if (this.editedID.length) {
-            this.updateExpenseOrEarning(itemData)
+            this.updateExpenseOrEarning({
+              itemData,
+              id: this.activeAccount.id
+            })
             this.closeDialog()
           } else {
             this.addExpenseOrEarning(itemData)
@@ -305,7 +310,8 @@
 
 <style lang="sass" scoped>
   .total-amount
-    text-align: right
+    text-align: left
+    font-size: 12px
     font-weight: 700
   .action-icons
     cursor: pointer

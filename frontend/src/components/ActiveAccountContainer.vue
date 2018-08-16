@@ -1,5 +1,5 @@
 <template>
-	<v-flex class="dashboard__element" xs12 sm6 md3 d-flex>
+	<v-flex class="dashboard__element" xs12 sm6 md4 d-flex>
 		<v-card>
 			<dashboard-element-header title="ACTUAL BALANCE" :subtitle="activeAccount.name" />
 			<v-flex class="dashboard__active-account__content">

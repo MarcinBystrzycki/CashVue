@@ -15,7 +15,10 @@ const connection = mysql.createConnection({
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	port: process.env.DB_PORT,
-	database: process.env.DB_DATABASE
+	database: process.env.DB_DATABASE,
+  connectTimeout: 5000,
+  ssl: 'Amazon RDS',
+
 });
 
 connection.connect();
@@ -75,7 +78,6 @@ app.get('/get/accounts/:id_token', (req, res) => {
 
 app.get('/get/accounts/info/:id', (req, res) => {
   const dbQuery = `SELECT * FROM settlements WHERE accountID = ${connection.escape(req.params.id)}`;
-
   connection.query(dbQuery, (err, results) => {
     res.send(results);
   });

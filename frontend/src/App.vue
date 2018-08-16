@@ -11,7 +11,7 @@
     <v-content>
       <v-container 
         fluid 
-        class="container container__main">
+        class="container container__main p-2">
         <router-view
           :auth="auth" 
           :authenticated="authenticated">

@@ -29,13 +29,24 @@ export default {
   setActiveAccountExpenses({ commit }, data) {
     commit(types.SET_ACTIVE_ACCOUNT_EXPENSES, data)
   },
+  setNotes({ commit }, data) {
+    commit(types.SET_NOTES, data)
+  },
+  addNote({ commit }, data) {
+
+  },
+  editNote({ commit }, data) {
+
+  },
+  deleteNote({ commit }, data) {
+
+  },
   toggleDrawer({ commit }) {
     commit(types.TOGGLE_DRAWER)
   },
   saveNewAccount({ commit, dispatch }, data) {
     http.post(apiUrl('post', ['accounts', 'add']), data)
       .then((res) => {
-        console.log(res)
         dispatch('getUserAccounts')
       })
       .catch((err) => console.error(err))
@@ -58,7 +69,9 @@ export default {
     http.get(apiUrl('get', ['accounts', localStorage.id_token]))
       .then((res) => {
         dispatch('setUserAccounts', res.data)
-        dispatch('setActiveAccount', res.data[state['activeIndex']])
+        dispatch('setNotes', res.data.notes)
+        console.log(res.data.notes)
+        dispatch('setActiveAccount', res.data.accounts[state['activeIndex']])
       })
       .catch((err) => console.error(err))
   },
@@ -83,16 +96,15 @@ export default {
   addExpenseOrEarning({ commit, dispatch }, data) {
     http.post(apiUrl('post', ['settlements', 'add']), data)
       .then((res) => {
-        console.log('addExpenseorEarning', data)
         dispatch('getUserAccounts')
       })
       .catch((err) => console.error(err))
   },
   updateExpenseOrEarning({ commit, dispatch }, data) {
-    http.post(apiUrl('post', ['settlements', 'update']), data)
+    http.post(apiUrl('post', ['settlements', 'update']), data.itemData)
       .then((res) => {
-        console.log('updateExpenseorEarning', data)
         dispatch('getUserAccounts')
+        dispatch('getActiveAccountEarningsAndExpenses', data.id)
       })
       .catch((err) => console.error(err))
   },

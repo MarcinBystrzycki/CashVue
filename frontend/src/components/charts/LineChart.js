@@ -58,7 +58,7 @@ export default {
       return {
         labels: _.map(getMonthLabels(this.dateRange), (month) => month.format('MMMM')),
         datasets: [{
-            label: `${this.type}s`,
+            label: `All ${this.type}s`,
             data: getMonthExpenses(getMonthLabels(this.dateRange), dataByDate),
             backgroundColor: '#17a2b8',
             borderWidth: 4,
