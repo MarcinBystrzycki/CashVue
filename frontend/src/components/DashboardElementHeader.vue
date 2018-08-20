@@ -1,9 +1,10 @@
 <template>
-	<v-card-title>
+	<v-card-title class="dashboard__element-header">
 		<h6>
 			{{ title }}
-			<small v-if="subtitle">{{ `(${subtitle})` }}</small>
 		</h6>
+		<v-spacer></v-spacer>
+		<slot></slot>
 		<v-spacer></v-spacer>
 		<v-btn class="btn__dashboard-elem-settings"flat icon>
 			<v-icon size="21">

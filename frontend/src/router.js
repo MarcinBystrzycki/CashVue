@@ -11,55 +11,55 @@ import Earnings from "./views/Earnings";
 Vue.use(Router);
 
 const checkAuth = (to, from, next) => {
-  if (store.getters['getAuthenticated']) {
-    next();
-  } else {
-    router.push({ path: '/' })
-  }
+	if (store.getters['getAuthenticated']) {
+		next();
+	} else {
+		router.push({ path: '/' })
+	}
 };
 
 const router = new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: "/",
-      name: "Home",
-      component: Home
-    },
-    {
-      path: "/callback",
-      name: "Callback",
-      component: Callback
-    },
-    {
-      path: "/profile",
-      name: "Profile",
-      component: Profile,
-      beforeEnter: checkAuth
-    },
-    {
-      path: "/dashboard",
-      name: "Wallet",
-      component: DashboardWallet,
-      beforeEnter: checkAuth
-    },
-    {
-      path: "/expenses",
-      name: "Expenses",
-      component: Expenses,
-      beforeEnter: checkAuth
-    },
-    {
-      path: "/earnings",
-      name: "Earnings",
-      component: Earnings,
-      beforeEnter: checkAuth
-    },
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ]
+	mode: 'history',
+	routes: [
+		{
+			path: "/",
+			name: "Home",
+			component: Home
+		},
+		{
+			path: "/callback",
+			name: "Callback",
+			component: Callback
+		},
+		{
+			path: "/profile",
+			name: "Profile",
+			component: Profile,
+			beforeEnter: checkAuth
+		},
+		{
+			path: "/dashboard",
+			name: "Wallet",
+			component: DashboardWallet,
+			beforeEnter: checkAuth
+		},
+		{
+			path: "/expenses",
+			name: "Expenses",
+			component: Expenses,
+			beforeEnter: checkAuth
+		},
+		{
+			path: "/earnings",
+			name: "Earnings",
+			component: Earnings,
+			beforeEnter: checkAuth
+		},
+		{
+			path: '*',
+			redirect: '/'
+		}
+	]
 });
 
 export default router;

@@ -20,35 +20,34 @@
 </template>
 
 <script>
-	import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
-	export default {
-		props: ['account', 'index'],
-		computed: {
-			...mapGetters({
-				accountColors: 'getAccountColors',
-				activeAccount: 'getActiveAccount'
-			})
-		},
-		methods: {
-			...mapActions({
-				setActiveAccount: 'setActiveAccount',
-				setActiveIndex: 'setActiveIndex',
-			}),
-			getButtonColor(color) {
-				if (color) {
-					const colorVal = this.accountColors[color]
+export default {
+	props: ['account', 'index'],
+	computed: {
+		...mapGetters({
+			accountColors: 'getAccountColors',
+			activeAccount: 'getActiveAccount'
+		})
+	},
+	methods: {
+		...mapActions({
+			setActiveAccount: 'setActiveAccount',
+			setActiveIndex: 'setActiveIndex',
+		}),
+		getButtonColor(color) {
+			if (color) {
+				const colorVal = this.accountColors[color]
 
-					return {
-						[color]: colorVal
-					}
+				return {
+					[color]: colorVal
 				}
-			},
-			chooseActiveButton() {
-				this.setActiveIndex(this.index)
-				this.setActiveAccount(this.account)
-			},
+			}
 		},
-	}
-
+		chooseActiveButton() {
+			this.setActiveIndex(this.index)
+			this.setActiveAccount(this.account)
+		},
+	},
+}
 </script>

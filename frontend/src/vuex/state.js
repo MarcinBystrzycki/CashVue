@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 export default {
 	authenticated: false,
 	user: {
@@ -35,8 +37,6 @@ export default {
 	activeAccountExpenses: [],
 	activeIndex: 0,
 	notes: [],
-	totals: {
-		expense: 0,
-		earning: 0,
-	},
+	fromRange: dayjs().subtract(30, 'day').format('YYYY-MM-DD'),
+	toRange: dayjs().format('YYYY-MM-DD'),
 };

@@ -62,6 +62,7 @@ app.get('/get/users/:id_token', (req, res) => {
 app.get('/get/accounts/:id_token', (req, res) => {
 	const userID = parseUserID(req.params.id_token);
 
+	console.log(userID)
 	knex.select().from('accounts').where({ userID })
 		.then((accounts) => {
 			knex.select().from('notes').where({ userID })
@@ -137,8 +138,10 @@ app.post('/post/accounts/update', (req, res) => {
 	knex('accounts')
 		.where({ id: req.body.id })
 		.update({
+			name: req.body.name,
 			actualBalance: req.body.actualBalance,
-			defaultCurrency: req.body.currency
+			defaultCurrency: req.body.defaultCurrency,
+			color: req.body.color
 		})
 		.then((results) => {
 			res.sendStatus(200);
@@ -312,6 +315,24 @@ app.post('/post/settlements/update', (req, res) => {
 			}
 		})
 
+});
+
+app.delete('/delete/accounts/:id', (req, res) => {
+
+	knex('accounts')
+		.where({ id: req.params.id })
+		.del()
+		.then((acc) => {
+
+			knex('settlements')
+				.where({ accountID: req.params.id })
+				.del()
+				.then((sett) => {
+					console.log(sett)
+				})
+
+			res.sendStatus(200);
+		});
 });
 
 app.delete('/delete/settlements/:id', (req, res) => {

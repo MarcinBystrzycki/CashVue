@@ -1,53 +1,53 @@
 <template>
-	<div>
+	<div style="width: 100%">
 		<v-layout class="earnings-expenses-charts__body" justify-space-around row wrap>
 			<v-flex md6 xs12 class="p-0">
 				<div class="earnings-expenses-charts__header m-0">
 					<span class="caption">
-						{{ `By categories (in ${this.currency}):` }}
+						{{ 'By categories' + currencyText}}
 					</span>
 				</div>
-				<pie-chart
+				<doughnut-chart
 					:width="280"
 					:height="280"
-					:options="{responsive: true, maintainAspectRatio: false}"
-					:dateRange="dateRange"
 					:type="type">
-				</pie-chart>
+				</doughnut-chart>
 			</v-flex>
 			<v-flex md6 xs12 class="p-0">
 				<div class="earnings-expenses-charts__header m-0">
 					<span class="caption">
-						{{ `By months (in ${this.currency}):` }}
+						{{ 'By months' + currencyText }}
 					</span>
 				</div>
 				<line-chart
 					:width="280"
 					:height="280"
-					:options="{responsive: true, maintainAspectRatio: false}"
-					:dateRange="dateRange"
 					:type="type">
 				</line-chart>
 			</v-flex>
 		</v-layout>
-		<earnings-expenses-info-table 
-			:type="type"
-			:dateRange="dateRange">
-		</earnings-expenses-info-table>
+		<active-account-info-table
+			:type="type">
+		</active-account-info-table>
 	</div>
 </template>
 
 <script>
-	import PieChart from './charts/PieChart'
-	import LineChart from './charts/LineChart'
-	import EarningsExpensesInfoTable from './EarningsExpensesInfoTable'
+import DoughnutChart from './charts/DoughnutChart'
+import LineChart from './charts/LineChart'
+import ActiveAccountInfoTable from './ActiveAccountInfoTable'
 
-	export default {
-		components: {
-			PieChart,
-			LineChart,
-			EarningsExpensesInfoTable,
-		},
-		props: ['type', 'dateRange', 'currency'],
+export default {
+	components: {
+		DoughnutChart,
+		LineChart,
+		ActiveAccountInfoTable,
+	},
+	props: ['type', 'currency'],
+	computed: {
+		currencyText() {
+			return this.currency ? ` (in ${this.currency}):` : ':'
+		}
 	}
+}
 </script>

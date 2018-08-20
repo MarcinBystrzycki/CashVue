@@ -1,8 +1,9 @@
 <template>
 	<v-container class="p-0" fluid grid-list-sm>
 		<v-layout row wrap>
-			<expenses-info-container
+			<earnings-expenses-info-container
 				title="EXPENSES INFO"
+				type="expense"
 				:items="expenses" />
 			<earnings-expenses-table-container 
 				title="EXPENSES LIST"
@@ -13,31 +14,27 @@
 </template>
 
 <script>
-	import EarningsExpensesTableContainer from '../components/EarningsExpensesTableContainer'
-	import ExpensesInfoContainer from '../components/ExpensesInfoContainer'
-	import { mapGetters, mapActions } from 'vuex'
+import EarningsExpensesTableContainer from '../components/EarningsExpensesTableContainer'
+import EarningsExpensesInfoContainer from '../components/EarningsExpensesInfoContainer'
+import { mapGetters, mapActions } from 'vuex'
 
-	export default {
-		components: {
-			EarningsExpensesTableContainer,
-			ExpensesInfoContainer
-		},
-		computed: {
-			...mapGetters({
-				expenses: 'getActiveAccountExpenses',
-			}),
-		},
-		methods: {
-			...mapActions({
-				getUserAccounts: 'getUserAccounts',
-			}),
-		},
-		created() {
-			this.getUserAccounts()
-		},
-	}
+export default {
+	components: {
+		EarningsExpensesTableContainer,
+		EarningsExpensesInfoContainer
+	},
+	computed: {
+		...mapGetters({
+			expenses: 'getActiveAccountExpenses',
+		}),
+	},
+	methods: {
+		...mapActions({
+			getUserAccounts: 'getUserAccounts',
+		}),
+	},
+	created() {
+		this.getUserAccounts()
+	},
+}
 </script>
-
-<style>
-	
-</style>

@@ -49,4 +49,9 @@ export default {
 	[types.SET_NOTES](state, value) {
 		state.notes = value
 	},
+	[types.SET_DATE_RANGES](state, data) {
+		state.fromRange = data.fromRange
+		state.toRange = data.toRange
+
+	}
 };

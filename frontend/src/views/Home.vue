@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<img src="../assets/logo.png">
+    <img src="../assets/logo.png">
     <h4 v-if="authenticated">
         You are logged in!
     </h4>
@@ -11,22 +11,15 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-  export default {
-    name: 'Home',
-    props: ['auth'],
-    computed: {
-      ...mapGetters({
-        authenticated: 'getAuthenticated'
-      })
-    },
+export default {
+  name: 'Home',
+  props: ['auth'],
+  computed: {
+    ...mapGetters({
+      authenticated: 'getAuthenticated'
+    })
   }
+};
 </script>
-
-<style>
-  a {
-    cursor: pointer;
-  }
-</style>
-
