@@ -1,0 +1,68 @@
+#app
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  font-family: 'Lato', sans-serif
+  text-align: center
+  color: #2c3e50
+  display: flex
+  .toolbar,
+  .footer__container
+    background-color: #41b883
+    .footer__footer-text
+      font-size: 12px
+    .btn__social
+      margin: 2px
+      height: 34px !important
+      width: 34px !important
+
+.container__main
+  height: calc(100vh - 100px)
+  position: relative
+.btn
+  padding: 0
+  border-radius: 5px
+
+.portfolio-link
+  color: white
+  &:hover
+    color: #1976d2
+    text-decoration: none
+
+.home__container
+  position: relative
+  top: 35%
+  .welcome-header
+    position: absolute
+    top: 35%
+    left: 50%
+    transform: translate(-50%, -35%)
+  .cashvue-title,
+  .cashvue-subtitle
+    font-size: 16px
+    line-height: 30px
+    span
+      font-size: 22px
+      font-weight: 700
+      color: #64B587
+      &:nth-of-type(odd)
+        color: #39495C
+  .cashvue-subtitle
+    span
+      font-size: 18px
+  .title
+    font-weight: 700
+    color: #64B587
+    animation: rotate 3s ease-in-out infinite
+  .link
+    font-weight: 700
+    font-size: 18px
+    color: #39495C
+    &:hover
+      color: #64B587 !important
+      text-decoration: none
+
+@keyframes rotate
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)

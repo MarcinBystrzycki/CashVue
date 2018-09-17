@@ -1,7 +1,10 @@
 {
   "root": true,
   "extends": [
-    "plugin:vue/essential",
-    "@vue/prettier"
-  ]
+    "airbnb-base",
+    "plugin:vue/essential"
+  ],
+  "rules": {
+    "import/no-unresolved": "off"
+  }
 }

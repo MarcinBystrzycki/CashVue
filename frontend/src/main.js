@@ -1,11 +1,19 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import "./registerServiceWorker";
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+import * as _ from 'lodash';
+import App from './App.vue';
+import router from './router';
+import './utils/filters';
+import './registerServiceWorker';
+import 'vuetify/dist/vuetify.min.css';
+import './sass/base.sass';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 Vue.config.productionTip = false;
 
+Vue.use(Vuetify);
+
 new Vue({
   router,
-  render: h => h(App)
-}).$mount("#app");
+  render: h => h(App),
+}).$mount('#app');
