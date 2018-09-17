@@ -1,19 +1,81 @@
+.dashboard
+	margin-bottom: 40px
+
 .dashboard__element
+	min-height: 300px
+
+.dashboard__element-header
+	border-bottom: 4px solid #dee2e6
+	height: 72px
+
+.header-title
+	font-size: 16px
+	font-weight: 700
+	text-shadow: 2px 2px 2px #dee2e6
 
 .dashboard__active-account__content
-	height: 50%
+	height: calc(100% - 93px)
 	display: flex
 	justify-content: center
 	align-items: center
+	.arrow1,
+	.arrow2,
+	.arrow3,
+	.arrow4
+		position: absolute
+	.arrow1
+		left: 25%
+		top: 40%
+		transform: rotate(45deg)
+	.arrow2
+		right: 25%
+		top: 40%
+		transform: rotate(135deg)
+	.arrow3
+		left: 25%
+		bottom: 20%
+		transform: rotate(-45deg)
+	.arrow4
+		right: 25%
+		bottom: 20%
+		transform: rotate(-135deg)
 
 .dashboard__active-account__title
 	margin-bottom: 0
 
 .dashboard__active-account__subtitle
-	text-decoration: underline
-	font-size: 1.2em
+	font-size: 1em
 	margin: 0
 	&:nth-of-type(2)
 		font-size: 1em
 		text-decoration: none
 		color: #cecccc
+
+.dashboard__accounts-container__content
+	height: calc(100% - 93px)
+	padding-top: 0
+
+.dashboard__active-account__info-table
+	.active-account__info-row
+		display: flex
+		align-items: center
+		justify-content: center
+		min-height: 75px
+		border-bottom: 1px solid #dee2e6
+		.chip
+			box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
+		.chip-content
+			color: white
+			text-shadow: 1px 1px 1px black
+			font-weight: 500
+		&.left-column,
+		&.right-column
+			.chip-name
+				color: white
+				text-shadow: 1px 1px 1px black
+				font-weight: 500
+			.avatar
+				color: #3476CB
+		&:nth-of-type(5),
+		&:nth-of-type(6)
+			border: none

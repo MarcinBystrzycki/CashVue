@@ -1,5 +1,10 @@
 <template>
   <v-navigation-drawer app id="nav" :value="drawer" fixed>
+    <v-toolbar color="transparent">
+      <div>
+        <logo :size="0.5"/>
+      </div>
+    </v-toolbar>
     <v-list dense class="navigation_list">
       <router-link to="/">
         <v-list-tile class="navigation__elem">
@@ -8,7 +13,7 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              Home
+              Start
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -82,7 +87,7 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              Log in
+              Log in / Sign up
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -106,23 +111,27 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
+import Logo from './Logo';
 
-  export default {
-    name: 'Navigation',
-    props: ['authenticated'],
-    computed: {
-      login () {
-        this.$emit('login')
-      },
-      logout () {
-        this.$emit('logout')
-      },
-      ...mapGetters({
-        drawer: 'getDrawer'
-      })
-    }
-  }
+export default {
+  name: 'Navigation',
+  components: {
+    Logo,
+  },
+  props: ['authenticated'],
+  computed: {
+    login() {
+      this.$emit('login');
+    },
+    logout() {
+      this.$emit('logout');
+    },
+    ...mapGetters({
+      drawer: 'getDrawer',
+    }),
+  },
+};
 </script>
 
 <style lang="sass" scoped>

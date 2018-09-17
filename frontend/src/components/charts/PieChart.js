@@ -1,67 +1,66 @@
-import { Doughnut } from 'vue-chartjs'
-import { mapGetters, mapActions } from 'vuex'
-import dayjs from 'dayjs'
+import { Pie } from 'vue-chartjs';
+import { mapGetters, mapActions } from 'vuex';
+import dayjs from 'dayjs';
 
 export default {
-  extends: Doughnut,
-  props: ['type', 'dateRange'],
+  extends: Pie,
+  data() {
+    return {
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+          },
+        },
+      },
+    };
+  },
   computed: {
     ...mapGetters({
       expenses: 'getActiveAccountExpenses',
       earnings: 'getActiveAccountEarnings',
-      colors: 'getAccountColors',
     }),
   },
   methods: {
     getDataCollection() {
-      const data = this.type === 'expense' ? this.expenses : this.earnings
-      const dataByDate = _.filter(data, (item) => {
-        return (dayjs(item.time).isAfter(dayjs(this.dateRange.from)) || 
-          dayjs(item.time).isSame(dayjs(this.dateRange.from))) && 
-          (dayjs(item.time).isBefore(dayjs(this.dateRange.to)) || 
-          dayjs(item.time).isSame(dayjs(this.dateRange.to)))
-      })
-      const categories = _.uniq(_.map(dataByDate, 'category'))
-      const values = _.map(categories, (item) => {
-        const amounts = _.filter(dataByDate, (obj) => obj.category === item)
-        
-        return _.sumBy(amounts, (obj) => obj.amount)
-      })
+      const expensesTotalAmount = _.sum(_.map(this.expenses, expense => expense.amount)).toFixed(2);
+      const earningsTotalAmount = _.sum(_.map(this.earnings, earnings => earnings.amount)).toFixed(2);
 
-      console.log(values)
+      let labels = ['Earnings', 'Expenses'];
+      let backgroundColor = ['#28a745', '#dc3545'];
+      let data = [earningsTotalAmount, expensesTotalAmount];
+
+
+      if (!parseFloat(earningsTotalAmount) && !parseFloat(expensesTotalAmount)) {
+        labels = ['no data'];
+        backgroundColor = ['#E5E5E5'];
+        data = [1];
+      }
 
       return {
-        labels: categories.length ? categories : ['no data'],
+        labels,
         datasets: [{
-            label: this.type,
-            backgroundColor: Object.values(this.colors).slice(0, categories.length),
-            data: values.length ? values : [1],
-          }
-        ]
-      }
+          backgroundColor,
+          data,
+        }],
+      };
     },
   },
   watch: {
     expenses: {
-      handler: function() {
-        this.renderChart(this.getDataCollection())
+      handler() {
+        this.renderChart(this.getDataCollection(), this.options);
       },
       deep: true,
     },
     earnings: {
-      handler: function() {
-        this.renderChart(this.getDataCollection())
+      handler() {
+        this.renderChart(this.getDataCollection(), this.options);
       },
       deep: true,
     },
-    dateRange: {
-      handler: function() {
-        this.renderChart(this.getDataCollection())
-      },
-      deep: true,
-    }
   },
-  mounted() {
-    this.renderChart(this.getDataCollection())
-  },
-}
+};

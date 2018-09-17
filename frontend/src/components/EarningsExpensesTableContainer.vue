@@ -1,8 +1,8 @@
 <template>
-  <v-flex md12 lg6 d-flex>
+  <v-flex md12 lg6 d-flex class="earnings-expenses__container">
     <v-card class="earnings-expenses-table__container">
       <v-card-title class="earnings-expenses__header">
-        <h6>
+        <h6 class="header-title">
           {{ title }}
         </h6>
         <v-spacer>
@@ -11,9 +11,14 @@
           v-model="dialog"
           max-width="500px">
           <v-btn
+            small
             color="primary"
+            class="btn-control"
             slot="activator">
             {{ 'add ' + type }}
+            <v-icon class="pl-1" size="20">
+              add_circle_outline
+            </v-icon>
           </v-btn>
           <v-form ref="addEarningExpenseForm" v-model="valid" lazy-validation>
             <v-card>
@@ -100,9 +105,10 @@
         </v-dialog>
         <v-spacer></v-spacer>
         <v-text-field
+          class="search-input"
           v-model="search"
           append-icon="search"
-          label="Search"
+          label="SEARCH"
           single-line
           hide-details
         ></v-text-field>
@@ -112,15 +118,25 @@
         hide-actions
         :pagination.sync="pagination"
         :headers="headers"
-        :items="items"
+        :items="visibleItems"
         :customFilter="filterItems"
         :search="search">
         <template slot="items" slot-scope="props">
-          <td class="earnings-expenses-table__cell">{{ props.item.name | valueCheck }}</td>
-          <td class="earnings-expenses-table__cell">{{ props.item.category | valueCheck }}</td>
-          <td class="earnings-expenses-table__cell">{{ props.item.amount | formatMoney }}</td>
-          <td class="earnings-expenses-table__cell">{{ props.item.time | valueCheck }}</td>
-          <td class="earnings-expenses-table__cell">{{ props.item.place | valueCheck }}</td>
+          <td class="earnings-expenses-table__cell">
+            {{ props.item.name | valueCheck }}
+          </td>
+          <td class="earnings-expenses-table__cell">
+            {{ props.item.category | valueCheck }}
+          </td>
+          <td class="earnings-expenses-table__cell">
+            {{ props.item.amount | formatMoney }}
+          </td>
+          <td class="earnings-expenses-table__cell">
+            {{ props.item.time | valueCheck }}
+          </td>
+          <td class="earnings-expenses-table__cell">
+            {{ props.item.place | valueCheck }}
+          </td>
           <td class="earnings-expenses-table__cell">
             <v-icon
               small
@@ -137,7 +153,11 @@
           </td>
         </template>
         <template slot="footer">
-          <td colspan="100%" class="earnings-expenses-table__cell total-amount"> Total amount: {{ totalAmount }}</td>
+          <td
+            colspan="100%"
+            class="earnings-expenses-table__cell total-amount">
+            {{ `all ${type}s: ${totalAmount}`.toUpperCase() }}
+          </td>
         </template>
       </v-data-table>
       <div class="text-xs-center pt-2 earnings-expenses__pagination">
@@ -148,165 +168,178 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
-  import dayjs from 'dayjs'
+import { mapGetters, mapActions } from 'vuex';
+import dayjs from 'dayjs';
+import * as _ from 'lodash';
 
-  export default {
-    props: ['title', 'items', 'type'],
-    data() {
-      return {
-        valid: true,
-        search: '',
-        totalAmount: 0,
-        dialog: false,
-        datepicker: false,
-        editedID: '',
-        pagination: {
-          rowsPerPage: 11,
-        },
-        editedItem: {
-          name: '',
-          category: '',
-          amount: '',
-          time: dayjs().format('YYYY-MM-DD'),
-          place: '',
-        },
-        defaultItem: {
-          name: '',
-          category: '',
-          amount: '',
-          time: dayjs().format('YYYY-MM-DD'),
-          place: '',
-        },
-        categories: ['Food, drinks', 'Shopping', 'Housing', 'Transport', 'Car', 'Entertainment', 'Communication', 'Electronics', 'Finance', 'Investments', 'Income', 'Other'],
-        nameRule: [v => !!v || 'Name is required'],
-        categoryRule: [v => !!v || 'Category is required'],
-        amountRule: [v => !!v || 'Amount is required'],
-      }
+export default {
+  props: ['title', 'items', 'type'],
+  data() {
+    return {
+      valid: true,
+      search: '',
+      totalAmount: 0,
+      dialog: false,
+      datepicker: false,
+      editedID: '',
+      pagination: {
+        rowsPerPage: 10,
+      },
+      editedItem: {
+        name: '',
+        category: '',
+        amount: '',
+        time: dayjs().format('YYYY-MM-DD'),
+        place: '',
+      },
+      defaultItem: {
+        name: '',
+        category: '',
+        amount: '',
+        time: dayjs().format('YYYY-MM-DD'),
+        place: '',
+      },
+      categories: ['Food, drinks', 'Shopping', 'Housing', 'Transport', 'Car', 'Entertainment', 'Communication', 'Electronics', 'Finance', 'Investments', 'Income', 'Other'],
+      nameRule: [v => !!v || 'Name is required'],
+      categoryRule: [v => !!v || 'Category is required'],
+      amountRule: [v => !!v || 'Amount is required'],
+    };
+  },
+  methods: {
+    ...mapActions({
+      addExpenseOrEarning: 'addExpenseOrEarning',
+      updateExpenseOrEarning: 'updateExpenseOrEarning',
+      deleteExpenseOrEarning: 'deleteExpenseOrEarning',
+    }),
+    filtered(items, search) {
+      const searchParam = search.toString().toLowerCase();
+
+      return items.filter((item) => {
+        const keys = Object.keys(item).filter(key => key !== 'id' && key !== 'accountID' && key !== 'additional_notes');
+
+        return keys.some((key) => {
+          const value = item[key].toString().toLowerCase();
+
+          return value.includes(searchParam);
+        });
+      });
     },
-    methods: {
-      ...mapActions({
-        addExpenseOrEarning: 'addExpenseOrEarning',
-        updateExpenseOrEarning: 'updateExpenseOrEarning',
-        deleteExpenseOrEarning: 'deleteExpenseOrEarning',
-      }),
-      filtered(items, search, filter) {
-        search = search.toString().toLowerCase()
+    filterItems(items, search, filter) {
+      this.totalAmount = `${this.filtered(items, search, filter).reduce((previous, current) => parseFloat(previous) + parseFloat(current.amount), 0).toFixed(2)} ${this.currency}`;
 
-        return items.filter(item => {
-          const keys = Object.keys(item).filter(key => key !== 'id' && key !== 'accountID' && key !== 'additional_notes')
+      return this.filtered(items, search, filter);
+    },
+    editItem(item) {
+      this.editedID = item.id;
+      this.editedItem = Object.assign({}, { ...item, accountID: this.activeAccount.id });
+      this.dialog = true;
+    },
+    deleteItem(item) {
+      this.deleteExpenseOrEarning(item.id);
+    },
+    saveItem() {
+      const itemData = {
+        ...this.editedItem,
+        accountID: this.activeAccount.id,
+        type: this.type,
+      };
 
-          return keys.some(key => {
-            const value = item[key].toString().toLowerCase()
-
-            return value.includes(search)
-          })
-        })
-      },
-      filterItems(items, search, filter) {
-        this.totalAmount = `${this.filtered(items, search, filter).reduce((previous, current) => parseFloat(previous) + parseFloat(current.amount), 0).toFixed(2)} ${this.activeAccount.defaultCurrency}`
-
-        return this.filtered(items, search, filter)
-      },
-      editItem(item) {
-        this.editedID = item.id
-        this.editedItem = Object.assign({}, {...item, accountID: this.activeAccount.id})
-        this.dialog = true
-      },
-      deleteItem(item) {
-        this.deleteExpenseOrEarning(item.id)
-      },
-      saveItem(event, item) {
-        const itemData = {
-          ...this.editedItem,
-          accountID: this.activeAccount.id,
-          type: this.type
+      if (this.$refs.addEarningExpenseForm.validate()) {
+        if (this.editedID.length) {
+          this.updateExpenseOrEarning({
+            itemData,
+            id: this.activeAccount.id,
+          });
+          this.closeDialog();
+        } else {
+          this.addExpenseOrEarning(itemData);
+          this.closeDialog();
         }
-
-        if (this.$refs.addEarningExpenseForm.validate()) {
-          if (this.editedID.length) {
-            this.updateExpenseOrEarning(itemData)
-            this.closeDialog()
-          } else {
-            this.addExpenseOrEarning(itemData)
-            this.closeDialog()
-          }
-        }
-      },
-      closeDialog() {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedID = ''
-        }, 300)
       }
     },
-    computed: {
-      ...mapGetters({
-        activeAccount: 'getActiveAccount',
-      }),
-      formTitle() {
-        return this.editedID.length ? 'Edit item' : 'New item'
-      },
-      headers() {
-        return [
-          {
-            text: 'Name',
-            align: 'center',
-            sortable: true,
-            value: 'name',
-          },
-          {
-            text: 'Category',
-            align: 'center',
-            sortable: true,
-            value: 'category',
-          },
-          {
-            text: `Amount (${this.activeAccount.defaultCurrency})`,
-            align: 'center',
-            sortable: true,
-            value: 'amount',
-          },
-          {
-            text: 'Date',
-            align: 'center',
-            sortable: true,
-            value: 'time',
-          },
-          {
-            text: 'Place',
-            align: 'center',
-            sortable: true,
-            value: 'place',
-          },
-          {
-            text: 'Actions',
-            align: 'center',
-            sortable: false
-          }
-        ]
-      },
-      pages() {
-        if (this.pagination.rowsPerPage == null ||
-          this.pagination.totalItems == null
-        ) return 0
+    closeDialog() {
+      this.dialog = false;
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedID = '';
+      }, 300);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      activeAccount: 'getActiveAccount',
+      fromRange: 'getFromRange',
+      toRange: 'getToRange',
+    }),
+    currency() {
+      return this.activeAccount.defaultCurrency || '';
+    },
+    visibleItems() {
+      const from = dayjs(this.fromRange);
+      const to = dayjs(this.toRange);
 
-        return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-      }
+      return _.filter(this.items, (item) => {
+        const itemDate = dayjs(item.time);
+        return (itemDate.isAfter(from)
+                    || itemDate.isSame(from))
+                    && (itemDate.isBefore(to)
+                    || itemDate.isSame(to));
+      });
     },
-    watch: {
-      dialog(val) {
-        val || this.closeDialog()
-      },
+    formTitle() {
+      return this.editedID.length ? 'Edit item' : 'New item';
     },
-  }
+    headers() {
+      return [
+        {
+          text: 'Name',
+          align: 'center',
+          sortable: true,
+          value: 'name',
+        },
+        {
+          text: 'Category',
+          align: 'center',
+          sortable: true,
+          value: 'category',
+        },
+        {
+          text: `Amount (${this.currency})`,
+          align: 'center',
+          sortable: true,
+          value: 'amount',
+        },
+        {
+          text: 'Date',
+          align: 'center',
+          sortable: true,
+          value: 'time',
+        },
+        {
+          text: 'Place',
+          align: 'center',
+          sortable: true,
+          value: 'place',
+        },
+        {
+          text: 'Actions',
+          align: 'center',
+          sortable: false,
+        },
+      ];
+    },
+    pages() {
+      if (this.pagination.rowsPerPage == null
+                || this.pagination.totalItems == null
+      ) return 0;
+
+      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage);
+    },
+  },
+  watch: {
+    dialog(val) {
+      return val || this.closeDialog();
+    },
+  },
+};
 </script>
-
-<style lang="sass" scoped>
-  .total-amount
-    text-align: right
-    font-weight: 700
-  .action-icons
-    cursor: pointer
-</style>

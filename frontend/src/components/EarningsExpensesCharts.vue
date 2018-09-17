@@ -1,41 +1,53 @@
 <template>
-	<v-container>
-		<v-layout class="mb-3 caption" row>
-			<v-flex text-left>
-				{{ `By categories (in ${this.currency}):` }}
-			</v-flex>
-			<v-flex text-left>
-				{{ `By months (in ${this.currency}):` }}
-			</v-flex>
-		</v-layout>
-		<v-layout justify-space-around row>
-			<pie-chart
-				:width="280"
-				:height="280"
-				:options="{responsive: true, maintainAspectRatio: false}"
-				:dateRange="dateRange"
-				:type="type">
-			</pie-chart>
-			<line-chart
-				:width="280"
-				:height="280"
-				:options="{responsive: true, maintainAspectRatio: false}"
-				:dateRange="dateRange"
-				:type="type">
-			</line-chart>
-		</v-layout>
-	</v-container>
+  <div style="width: 100%">
+    <v-layout class="earnings-expenses-charts__body" justify-space-around row wrap>
+      <v-flex md6 xs12 class="p-0">
+        <div class="earnings-expenses-charts__header m-0">
+          <span class="caption">
+            {{ 'By categories' + currencyText}}
+          </span>
+        </div>
+        <doughnut-chart
+          :width="280"
+          :height="280"
+          :type="type">
+        </doughnut-chart>
+      </v-flex>
+      <v-flex md6 xs12 class="p-0">
+        <div class="earnings-expenses-charts__header m-0">
+          <span class="caption">
+            {{ 'By months' + currencyText }}
+          </span>
+        </div>
+        <line-chart
+          :width="280"
+          :height="280"
+          :type="type">
+        </line-chart>
+      </v-flex>
+    </v-layout>
+    <active-account-info-table
+      :type="type">
+    </active-account-info-table>
+  </div>
 </template>
 
 <script>
-	import PieChart from './charts/PieChart'
-	import LineChart from './charts/LineChart'
+import DoughnutChart from './charts/DoughnutChart';
+import LineChart from './charts/LineChart';
+import ActiveAccountInfoTable from './ActiveAccountInfoTable';
 
-	export default {
-		components: {
-			PieChart,
-			LineChart,
-		},
-		props: ['type', 'dateRange', 'currency'],
-	}
+export default {
+  components: {
+    DoughnutChart,
+    LineChart,
+    ActiveAccountInfoTable,
+  },
+  props: ['type', 'currency'],
+  computed: {
+    currencyText() {
+      return this.currency ? ` (in ${this.currency}):` : ':';
+    },
+  },
+};
 </script>
