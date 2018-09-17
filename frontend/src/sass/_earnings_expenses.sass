@@ -5,17 +5,31 @@
 .expenses-info__container
 	min-height: calc(100vh - 136px) !important
 
+.search-input
+	min-width: 150px
+
 .earnings-expenses-table
 	th
 		vertical-align: inherit !important
+		padding: 0 2px !important
+	.total-amount
+		text-align: left
+		font-size: 12px
+		font-weight: 700
+		padding: 0 12px !important
+	.action-icons
+		cursor: pointer
 
 .earnings-expenses-table__cell
-    vertical-align: inherit !important
+	vertical-align: inherit !important
+	padding: 0 2px !important
+	.actions
+		display: inline
 
 .earnings-expenses__header
-    font-size: 18px
-    font-weight: 100
-    min-height: 82px
+	font-size: 18px
+	font-weight: 100
+	min-height: 82px
 
 .earnings-expenses__pagination
 	margin-bottom: 35px
@@ -30,8 +44,6 @@
 	display: flex
 	align-items: center
 	justify-content: center
-
-.earnings-expenses__card-media
 
 .earnings-expenses-charts__body
 	border-bottom: 4px solid #dee2e6

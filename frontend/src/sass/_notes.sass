@@ -1,0 +1,86 @@
+.notes__main-component
+	height: calc(100% - 72px)
+	position: relative
+	.btn__notes_filter
+		height: 18px
+		width: 28px
+		color: black
+		border: 1px solid #DFE2E6
+	.btn__arrow
+		position: absolute
+		background-color: white
+		.arrow
+			color: #DFE2E6
+			&.active
+				color: #4B85CF
+		&:nth-of-type(1)
+			top: 46%
+			left: calc(50% - 2px)
+			transform: translate(-46%, -50%)
+		&:nth-of-type(2)
+			top: 54%
+			left: calc(50% + 1px)
+			transform: translate(-54%, -50%) rotate(180deg)
+	.notes__column-wrapper
+		height: 100%
+	.notes__column
+		&:nth-of-type(1)
+			border-right: 2px solid #DFE2E6
+		&:nth-of-type(2)
+			border-left: 2px solid #DFE2E6
+		.notes__column-header
+			font-size: 12px
+			font-weight: 500
+			color: #DFE2E6
+			margin: 0
+		.notes__list
+			height: calc(100% - 62px)
+			margin-bottom: 6px
+			.list__tile
+				height: 34px
+				padding-right: 0
+			.list__tile__title
+				font-size: 11px
+		.notes__note-tile
+			height: 34px
+			border: 1px solid #DFE2E6
+			margin: 0 16px
+			transition: .3s ease
+			cursor: pointer
+			&:hover,
+			&.active
+				border: 1px solid #4B85CF
+			.completed
+				text-decoration: line-through
+			.notes__note-tile__input
+				width: calc(100% - 16px)
+			.notes__note-tile__flag
+				width: 48px
+				border-left: 1px solid #DFE2E6
+				&:hover
+					.material-icons
+						opacity: 1
+				.material-icons
+					position: relative
+					cursor: pointer
+					left: 50%
+					opacity: 0.5
+					transform: translate(-50%, 0)
+			.notes__note-tile__controls
+				height: 100%
+				display: inline
+				padding: 0
+				border-left: 1px solid #DFE2E6
+				position: relative
+				.active
+					color: #4B85CF !important
+				.material-icons
+					position: relative
+					cursor: pointer
+					top: 15%
+					color: #DFE2E6
+					transition: .3s ease
+					&:hover
+						color: #4B85CF
+					&:nth-of-type(2)
+						margin-left: 5px
