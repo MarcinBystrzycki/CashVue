@@ -7,28 +7,34 @@
         </h6>
         <v-spacer>
         </v-spacer>
-        <span class="body-1">
-          Start date:
-        </span>
-        <v-btn
-          small
-          color="primary"
-          text-color="white"
-          class="btn-control ml-3 mr-3"
-          @click="dialog = true">
-          {{ fromRange }}
-        </v-btn>
-        <span class="body-1">
-          End date:
-        </span>
-        <v-btn
-          small
-          color="primary"
-          text-color="white"
-          class="btn-control ml-3 mr-3"
-          @click="dialog = true">
-          {{ toRange }}
-        </v-btn>
+        <div>
+          <div>
+            <span class="body-1">
+              Start date:
+            </span>
+            <v-btn
+              small
+              color="primary"
+              text-color="white"
+              class="btn__control ml-3 mr-3"
+              @click="dialog = true">
+              {{ fromRange }}
+            </v-btn>
+          </div>
+          <div>
+            <span class="body-1">
+              End date:
+            </span>
+            <v-btn
+              small
+              color="primary"
+              text-color="white"
+              class="btn__control ml-3 mr-3"
+              @click="dialog = true">
+              {{ toRange }}
+            </v-btn>
+          </div>
+        </div>
         <v-dialog
           width="586"
           v-model="dialog">

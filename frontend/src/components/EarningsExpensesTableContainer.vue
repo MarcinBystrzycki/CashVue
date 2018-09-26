@@ -13,7 +13,7 @@
           <v-btn
             small
             color="primary"
-            class="btn-control"
+            class="btn__control"
             slot="activator">
             {{ 'add ' + type }}
             <v-icon class="pl-1" size="20">
@@ -108,7 +108,7 @@
           class="search-input"
           v-model="search"
           append-icon="search"
-          label="SEARCH"
+          label="Search"
           single-line
           hide-details
         ></v-text-field>

@@ -6,7 +6,7 @@
           small
           color="primary"
           @click="addNewNote"
-          class="btn-control correct-position">
+          class="btn__control correct-position">
           Add todo
           <v-icon class="pl-1" size="20">
             add_circle_outline

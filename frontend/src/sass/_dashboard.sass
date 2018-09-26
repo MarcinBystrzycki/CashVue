@@ -1,12 +1,11 @@
 .dashboard
-	margin-bottom: 40px
-
+	display: flex
 .dashboard__element
 	min-height: 300px
 
 .dashboard__element-header
 	border-bottom: 4px solid #dee2e6
-	height: 72px
+	min-height: 76px
 
 .header-title
 	font-size: 16px
@@ -59,7 +58,6 @@
 	.active-account__info-row
 		display: flex
 		align-items: center
-		justify-content: center
 		min-height: 75px
 		border-bottom: 1px solid #dee2e6
 		.chip
@@ -70,6 +68,7 @@
 			font-weight: 500
 		&.left-column,
 		&.right-column
+			justify-content: center
 			.chip-name
 				color: white
 				text-shadow: 1px 1px 1px black

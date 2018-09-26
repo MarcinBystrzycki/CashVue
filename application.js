@@ -73,7 +73,7 @@ app.get('/kanban', (req, res) => {
   res.sendFile('/public_html/kanban_board/build/index.html', {root: '.'});
 });
 
-app.get('/cashvue/*', (req, res) => {
+app.get(['/cashvue','/cashvue/*'], (req, res) => {
 	res.sendFile('/public_html/cash_vue/dist/index.html', {root: '.'});
 });
 

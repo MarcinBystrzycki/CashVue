@@ -6,7 +6,7 @@
     <v-btn
       small
       color="primary"
-      class="btn-control"
+      class="btn__control"
       slot="activator">
       Remove
       <v-icon class="pl-1" size="20">

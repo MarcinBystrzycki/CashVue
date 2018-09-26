@@ -6,7 +6,7 @@
     <v-btn
       small
       color="primary"
-      class="btn-control"
+      class="btn__control"
       slot="activator">
       Add account
       <v-icon class="pl-1" size="20">

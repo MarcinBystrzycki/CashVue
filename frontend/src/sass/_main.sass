@@ -15,9 +15,41 @@
       height: 34px !important
       width: 34px !important
 
+#nav
+  height: 100vh
+  .navigation_list
+    max-height: calc(100% - 100px)
+    list-style-type: none
+    padding: 0
+    height: 100%
+    display: flex
+    flex-direction: column
+    position: relative
+    i
+      font-size: 1.5em
+  a
+    font-weight: bold
+    color: #2c3e50
+    font-size: 1.5em
+    &.router-link-exact-active
+      color: #41b883
+    &:hover
+      text-decoration: none
+      color: #41b883
+  .navigation__elem
+    margin: 0.5em
+    .log
+      position: relative
+      bottom: 0
+  .list__group--active
+    &::before,
+    &::after
+      background: transparent
+
 .container__main
   height: calc(100vh - 100px)
   position: relative
+  overflow: auto
 .btn
   padding: 0
   border-radius: 5px
@@ -32,6 +64,7 @@
   position: relative
   top: 35%
   .welcome-header
+    min-width: 300px
     position: absolute
     top: 35%
     left: 50%

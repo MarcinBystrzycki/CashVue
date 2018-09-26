@@ -37,16 +37,6 @@
             </strong>
           </a>
         </v-card-text>
-        <template v-for="(icon, index) in icons">
-          <v-btn
-            class="btn__social ml-0 mr-0 white--text"
-            :key="index"
-            icon>
-            <v-icon size="16">
-              {{ icon }}
-            </v-icon>
-          </v-btn>
-        </template>
     </v-footer>
   </v-app>
 </template>
@@ -79,7 +69,6 @@ export default {
       auth,
       authenticated,
       drawer: true,
-      icons: ['alternate_email'],
     };
   },
   methods: {

@@ -6,7 +6,7 @@
       </div>
     </v-toolbar>
     <v-list dense class="navigation_list">
-      <router-link to="/">
+      <router-link to="/cashvue/">
         <v-list-tile class="navigation__elem">
           <v-list-tile-action>
             <v-icon>fas fa-home</v-icon>
@@ -29,7 +29,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <router-link to="/dashboard">
+        <router-link to="/cashvue/dashboard">
           <v-list-tile class="navigation__elem pl-4">
             <v-list-tile-action>
               <v-icon>fas fa-wallet</v-icon>
@@ -41,7 +41,7 @@
             </v-list-tile-content>
           </v-list-tile>
         </router-link>
-        <router-link to="/expenses">
+        <router-link to="/cashvue/expenses">
           <v-list-tile class="navigation__elem pl-4">
             <v-list-tile-action>
               <v-icon>fas fa-wallet</v-icon>
@@ -53,7 +53,7 @@
             </v-list-tile-content>
           </v-list-tile>
         </router-link>
-        <router-link to="/earnings">
+        <router-link to="/cashvue/earnings">
           <v-list-tile class="navigation__elem pl-4">
             <v-list-tile-action>
               <v-icon>fas fa-wallet</v-icon>
@@ -66,7 +66,7 @@
           </v-list-tile>
         </router-link>
       </v-list-group>
-      <router-link to="/profile">
+      <router-link to="/cashvue/profile">
         <v-list-tile class="navigation__elem" v-if="authenticated">
           <v-list-tile-action>
             <v-icon>fas fa-users-cog</v-icon>
@@ -133,35 +133,3 @@ export default {
   },
 };
 </script>
-
-<style lang="sass" scoped>
-#nav
-  height: 100vh
-  .navigation_list
-    list-style-type: none
-    padding: 0
-    height: 100%
-    display: flex
-    flex-direction: column
-    position: relative
-    i
-      font-size: 1.5em
-  a
-    font-weight: bold
-    color: #2c3e50
-    font-size: 1.5em
-    &.router-link-exact-active
-      color: #41b883
-    &:hover
-      text-decoration: none
-      color: #41b883
-  .navigation__elem
-    margin: 0.5em
-    .log
-      position: relative
-      bottom: 0
-  .list__group--active
-    &::before,
-    &::after
-      background: transparent
-</style>

@@ -11,7 +11,7 @@
               <p class="cashvue-title">
                 Hello <span>{{ user.nickname || user.name }}</span>,
                 please go to your wallet's 
-                <router-link class="link" to="/dashboard"> dashboard </router-link>
+                <router-link class="link" to="/cashvue/dashboard"> dashboard </router-link>
                 to see more...
               </p>
           </h4>

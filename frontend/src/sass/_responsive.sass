@@ -1,0 +1,52 @@
+@media (max-width: 600px)
+	.active-account__info-row
+		.chip-name,
+		.chip__content
+			font-size: 11px
+	.btn__account
+		.btn__account--account_name,
+		.btn__account--balance
+			font-size: 8px
+	.dashboard__element-header
+		height: auto
+	.dashboard__element
+		&:last-of-type
+			margin-bottom: 0px
+			min-height: 500px
+	.earnings-expenses__container
+		&:first-of-type
+			margin-bottom: 0
+	.notes__column
+		margin-bottom: 16px
+	.notes__main-component
+		.notes__column-wrapper
+			padding-top: 2px
+		.notes__column
+			&:last-of-type
+				border-top: 4px solid #DFE2E6
+				padding-top: 8px
+			.notes__column-header
+				padding-top: 4px
+			.notes__list
+				height: 186px
+	.notes__main-component
+		.btn__arrow
+			border: 1px solid #DFE2E6
+			&:nth-of-type(1)
+				left: 1px
+				top: 48%
+				transform: rotate(90deg)
+			&:nth-of-type(2)
+				left: auto
+				right: 1px
+				top: 48%
+				transform: rotate(-90deg)
+	.click-accounts-text
+		padding-top: 6px
+		text-align: center
+	.dashboard__active-account__info-table
+		.active-account__info-row
+			&.left-column
+				justify-content: flex-start
+			&.right-column
+				justify-content: flex-end

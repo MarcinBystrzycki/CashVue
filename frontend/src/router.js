@@ -14,7 +14,7 @@ const checkAuth = (to, from, next) => {
   if (store.getters.getAuthenticated) {
     next();
   } else {
-    router.push({ path: '/' });
+    router.push({ path: '/cashvue/' });
   }
 };
 
@@ -22,42 +22,42 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/cashvue/',
       name: 'Home',
       component: Home,
     },
     {
-      path: '/callback',
+      path: '/cashvue/callback',
       name: 'Callback',
       component: Callback,
     },
     {
-      path: '/profile',
+      path: '/cashvue/profile',
       name: 'Profile',
       component: Profile,
       beforeEnter: checkAuth,
     },
     {
-      path: '/dashboard',
+      path: '/cashvue/dashboard',
       name: 'Wallet',
       component: DashboardWallet,
       beforeEnter: checkAuth,
     },
     {
-      path: '/expenses',
+      path: '/cashvue/expenses',
       name: 'Expenses',
       component: Expenses,
       beforeEnter: checkAuth,
     },
     {
-      path: '/earnings',
+      path: '/cashvue/earnings',
       name: 'Earnings',
       component: Earnings,
       beforeEnter: checkAuth,
     },
     {
       path: '*',
-      redirect: '/',
+      redirect: '/cashvue/',
     },
   ],
 });

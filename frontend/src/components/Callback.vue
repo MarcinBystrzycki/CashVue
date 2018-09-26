@@ -12,9 +12,6 @@ export default {
     this.auth.handleAuthentication();
     return {};
   },
-  mounted() {
-    // this.$router.push('/');
-  },
 };
 </script>
 
@@ -30,5 +27,4 @@ export default {
         bottom: 0
         left: 0
         right: 0
-
 </style>

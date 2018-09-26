@@ -5,7 +5,7 @@
     v-model="modal">
     <v-btn
       small
-      class="btn-control"
+      class="btn__control"
       color="primary"
       slot="activator">
       Edit
